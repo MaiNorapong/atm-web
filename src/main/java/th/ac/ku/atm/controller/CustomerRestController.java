@@ -2,6 +2,7 @@ package th.ac.ku.atm.controller;
 
 import org.springframework.web.bind.annotation.*;
 import th.ac.ku.atm.model.Customer;
+import th.ac.ku.atm.service.CustomerService;
 
 import java.util.List;
 
