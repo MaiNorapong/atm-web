@@ -43,6 +43,14 @@ public class BankAccountController {
                               Model model) {
         bankAccountService.editBankAccount(bankAccount);
         model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
-        return "redirect:bankaccount";
+        return "redirect:/bankaccount";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String editAccount(@PathVariable int id,
+                              Model model) {
+        bankAccountService.deleteBankAccount(id);
+        model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
+        return "redirect:/bankaccount";
     }
 }
