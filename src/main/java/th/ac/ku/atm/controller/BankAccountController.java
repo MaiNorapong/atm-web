@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import th.ac.ku.atm.model.BankAccount;
+import th.ac.ku.atm.model.Money;
 import th.ac.ku.atm.service.BankAccountService;
 
 @Controller
@@ -47,9 +48,41 @@ public class BankAccountController {
     }
 
     @PostMapping("/delete/{id}")
-    public String editAccount(@PathVariable int id,
-                              Model model) {
+    public String deleteAccount(@PathVariable int id,
+                                Model model) {
         bankAccountService.deleteBankAccount(id);
+        model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
+
+    @GetMapping("/deposit/{id}")
+    public String getDepositPage(@PathVariable int id, Model model) {
+        BankAccount account = bankAccountService.getBankAccount(id);
+        model.addAttribute("bankAccount", account);
+        return "bankaccount-deposit";
+    }
+
+    @GetMapping("/withdraw/{id}")
+    public String getWithdrawPage(@PathVariable int id, Model model) {
+        BankAccount account = bankAccountService.getBankAccount(id);
+        model.addAttribute("bankAccount", account);
+        return "bankaccount-withdraw";
+    }
+
+    @PostMapping("/deposit/{id}")
+    public String depositMoney(@PathVariable int id,
+                               @ModelAttribute Money money,
+                               Model model) {
+        bankAccountService.deposit(id, money);
+        model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
+        return "redirect:/bankaccount";
+    }
+
+    @PostMapping("/withdraw/{id}")
+    public String withdrawMoney(@PathVariable int id,
+                                @ModelAttribute Money money,
+                                Model model) {
+        bankAccountService.withdraw(id, money);
         model.addAttribute("bankaccounts", bankAccountService.getBankAccounts());
         return "redirect:/bankaccount";
     }

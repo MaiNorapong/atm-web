@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"
+      layout:decorate="~{fragments/main_layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml"
+      xmlns:th="https://www.thymeleaf.org">
+
+<div class="container" layout:fragment="content">
+    <div class="container">
+        <h1>Withdraw Money</h1>
+        <form method="POST"
+              th:action="@{/bankaccount/withdraw/{id}(id=${bankAccount.id})}">
+
+            <div class="form-group">
+                <label for="inputId">Id</label>
+                <input disabled type="text" th:field="*{bankAccount.id}" class="form-control" id="inputId">
+            </div>
+
+            <div class="form-group">
+                <label for="inputCustomer">Customer Id</label>
+                <input disabled type="text" th:field="*{bankAccount.customerId}" class="form-control" id="inputCustomer">
+            </div>
+
+            <div class="form-group">
+                <label for="inputType">Type</label>
+                <input disabled type="text" th:field="*{bankAccount.type}" class="form-control" id="inputType">
+            </div>
+
+            <div class="form-group">
+                <label for="inputBalance">Balance</label>
+                <input disabled type="text" th:field="*{bankAccount.balance}" class="form-control" id="inputBalance">
+            </div>
+
+            <div class="form-group">
+                <label for="inputAmount">Amount</label>
+                <input type="text" class="form-control" name="amount" id="inputAmount">
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-primary" type="submit">
+            </div>
+        </form>
+    </div>
+</div>
